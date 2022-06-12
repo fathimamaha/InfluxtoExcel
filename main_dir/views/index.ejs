@@ -1,190 +1,242 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>
-InfluxtoExcel
-  </title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Influx To Excel</title>
+  </head>
   <style>
-*
-{
-    outline: none;
-}
-/* The following tag selector form uses one property for specifying the height of a form. */
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
 
-form
-{
-    height: 150px;
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
 }
-/* The following tag selector input use the different properties for specifying the text field. */
 
-input[type="text"]
-{
+html, body {
+    height: 100%;
+    background-color: #152733;
+    overflow: hidden;
+}
+
+
+.form-holder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+}
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.form-content .form-items {
+    border: 3px solid #fff;
+    padding: 40px;
+    display: inline-block;
     width: 100%;
-    height: 80px;
-    font-size: 30px;
-    line-height: 1;
-}
-/* The following tag selector uses the color of placeholder as orange for the input text field. */
-input[type="text"]::placeholder
-{
-    color: white;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
 
-.tb
-{
-    display: table;
+.form-content h3 {
+    color: #fff;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: #fff;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: #fff;
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
     width: 100%;
-}
-.td
-{
-    display: table-cell;
-    vertical-align: middle;
-}
-/* The following tag selector uses the different properties for specifying all the inputs and buttons used in the body tag in this html file. */
-
-input, button
-{
-    color: black;
-    font-family: Arial;
-    padding: 0;
-    margin: 0;
+    padding: 9px 20px;
+    text-align: left;
     border: 0;
-    background-color: transparent;
-}
-/* the following id selector cover uses the different attribute which are used between the body tag */
-#cover
-{
-    position: absolute;
-    top: 50%;
- width: 1200px;
-    margin: -2px auto 0 auto;
-    background-color: #4FADEA;
-    border-radius: 3px;
-    left: 0;
-    right: 0;
-    transform: scale(0.6);
-}
-/* The following tag selector button uses the different proprties for specifying the button on a web page. */
-button
-{
-    position: relative;
-    display: block;
-    width: 30px;
-    height: 96px;
-    cursor: pointer;
-}
-/* The following id selector uses the different properties for searching button */
-#s-circle
-{
-    position: relative;
-    top: -8px;
-    left: 0;
-    width: 43px;
-    height: 43px;
-    margin-top: 0;
-    border-width: 15px;
-    border: 15px solid #fff;
-    background-color: transparent;
-    border-radius: 50%;
-    transition: 0.5s ease all;
-}
-button span
-{
-    position: absolute;
-    top: 68px;
-    left: 43px;
-    display: block;
-    width: 45px;
-    height: 15px;
-    background-color: transparent;
-    border-radius: 10px;
-    transform: rotateZ(52deg);
-    transition: 0.5s ease all;
-}
-button span:before, button span:after
-{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 45px;
-    height: 15px;
+    outline: 0;
+    border-radius: 6px;
     background-color: #fff;
-    border-radius: 10px;
-    transform: rotateZ(0);
-    transition: 0.5s ease all;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
 }
-#s-cover:hover #s-circle
-{
-    top: -1px;
-    width: 67px;
-    height: 15px;
-    border-width: 0;
+
+
+.btn-primary{
+    background-color: #6C757D;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: #495056;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
     background-color: #fff;
-    border-radius: 20px;
-}
-/* The following hover effect use the different properties when you take mouse to that element where thr s-cover is selector is used. */
-#s-cover:hover span
-{
-    top: 50%;
-    left: 56px;
-    width: 25px;
-    margin-top: -9px;
-    transform: rotateZ(0);
-}
-#s-cover:hover button span:before
-{
-    bottom: 11px;
-    transform: rotateZ(52deg);
-}
-#s-cover:hover button span:after
-{
-    bottom: -11px;
-    transform: rotateZ(-52deg);
-}
-#s-cover:hover button span:before, #s-cover:hover button span:after
-{
-    right: 6px;
-    width: 40px;
-    background-color: #fff;
-}
-body, html {
-  height: 100%;
-  margin: 0;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
 }
 
-.bg {
-  /* The image used */
-  background-image: url("https://i.ibb.co/yN1GrgP/Untitled-design-1.png");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
 }
 
-        </style>
-    </head>
-    <body>
-<div class="bg"></div>
-<div id="cover">
-  <fieldset>
-    <form action="/success" method="post">
-<div class="tb">
-<div class="td">
-<!-- The following tag is input for the text input field which is used as a seach field on a web page -->
-<input name="query" type="text" class="ghost-input" placeholder='from(bucket:"youtube") |> range(start: 2021-03-15T18:31:50Z) |> filter(fn: (r) => r._measurement == "youtube_channel") |> filter(fn: (r) => r["_field"] == "videos")' required>
-      <div class="td" id="s-cover">
-        <button type="submit" class="ghost-button" value="Get Excel">
-          <div id="s-circle"> </div>
-          <span> </span>
-        </button>
-      </div>
+.mv-up{
+    margin-top: -9px !important;
+    margin-bottom: 8px !important;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+  </style>
+  <body>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <form action="/success" method="post">
+
+                        <h3>Influx to Excel</h3>
+                        <p>To connect to an InfluxDB instance, please provide the instance url, organisation name and the token for read access. Provide the Time range, Influx query without date range, click Download.</p>
+                        <form class="requires-validation" novalidate>
+
+                            <div class="col-md-11">
+                               <input class="form-control" type="text" name="url" placeholder="https://us-east-1-1.aws.cloud2.influxdata.com/" required>
+                               <div class="valid-feedback">URL is invalid!</div>
+                               <div class="invalid-feedback">URL field cannot be blank!</div>
+                            </div>
+
+                            <div class="col-md-11">
+                                <input class="form-control" type="text" name="org" placeholder="Organisation Name/E-mail Address" required>
+                                 <div class="valid-feedback">Organisation Name is valid!</div>
+                                 <div class="invalid-feedback">Organisation Name cannot be blank!</div>
+                            </div>
+
+                            <div class="col-md-11">
+                                <input class="form-control" type="text" name="token" placeholder="INFLUX_TOKEN" required>
+                                 <div class="valid-feedback">Token is valid!</div>
+                                 <div class="invalid-feedback">Token cannot be blank!</div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col">
+                                <input class="form-control" type="text" name="startdate" placeholder="Start Date as YYYY-MM-DD" required>
+                                 <div class="valid-feedback">Start Date is valid!</div>
+                                 <div class="invalid-feedback">Start Date cannot be blank!</div>
+                                 </div>
+                                 <div class="col">
+                                    <input class="form-control" type="text" name="starttime" placeholder="Start Time as HH:MM:SS" required>
+                                     <div class="valid-feedback">Start Time is valid!</div>
+                                     <div class="invalid-feedback">Start Time cannot be blank!</div>
+                                     </div>
+                                     <div class="col">
+                                        <input class="form-control" type="text" name="enddate" placeholder="End Date as YYYY-MM-DD" required>
+                                         <div class="valid-feedback">End Date is valid!</div>
+                                         <div class="invalid-feedback">End Date cannot be blank!</div>
+                                         </div>
+                                         <div class="col">
+                                            <input class="form-control" type="text" name="endtime" placeholder="End Time as HH:MM:SS" required>
+                                             <div class="valid-feedback">End Time is valid!</div>
+                                             <div class="invalid-feedback">End Time cannot be blank!</div>
+                                             </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label style: >sample query: from(bucket:"youtube") |> filter(fn: (r) => r._measurement == "youtube_channel") |> filter(fn: (r) => r["_field"] == "videos")</label>
+                                <input class="form-control" type="text" name="query" placeholder='from(bucket:"youtube") |> filter(fn: (r) => r._measurement == "youtube_channel") |> filter(fn: (r) => r["_field"] == "videos")' required>
+                                 <div class="valid-feedback">Query field is valid!</div>
+                                 <div class="invalid-feedback">Query field cannot be blank!</div>
+                             </div>
+
+                            <div class="form-button mt-3">
+                                <button id="connect" type="submit" class="btn btn-primary">Connect to Instance and Download</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </form>
-</div>
-    </body>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
