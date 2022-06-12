@@ -11,11 +11,25 @@ app.get('/download', function (req, res,next) {
 }),
 
 app.post('/success', function (req, res) {
+  var url = String(req.body.url);
+  var org = String(req.body.org);
+  var token = String(req.body.token);
+  var startdate = String(req.body.startdate);
+  var enddate = String(req.body.enddate);
+  var starttime = String(req.body.starttime);
+  var endtime = String(req.body.endtime);
 
-  var queryApi = new influxdb_client_1.InfluxDB({ url: env_1.url, token: env_1.token }).getQueryApi(env_1.org);
+  var queryApi = new influxdb_client_1.InfluxDB({ url: url, token: token }).getQueryApi(org);
   var fluxQuery = JSON.stringify(req.body.query);
+  fluxQuery = fluxQuery.replace(/\t/g, '');
+  insert_index=fluxQuery.indexOf('|')
+  split1=fluxQuery.slice(0,insert_index)
+  split2=fluxQuery.slice(insert_index)
+  fluxQuery=split1+'|> range(start: '+startdate+'T'+starttime+'.000Z, stop: '+enddate+'T'+endtime+'.000Z) '+split2
   fluxQuery = fluxQuery.replace(/\\/g,'');
+  fluxQuery = fluxQuery.replace(/[\r\n]+/g,"")
   fluxQuery = fluxQuery.substring(1, fluxQuery.length-1);
+  console.log(fluxQuery)
 
   const Excel = require('exceljs')
   let workbook = new Excel.Workbook()
