@@ -1,9 +1,9 @@
 /** InfluxDB v2 URL */
-const url = process.env['INFLUX_URL'] || '<url>'
+const url = process.env['INFLUX_URL'] || 'https://us-east-1-1.aws.cloud2.influxdata.com'
 /** InfluxDB authorization token */
-const token = process.env['INFLUX_TOKEN'] || '<token>'
+const token = process.env['INFLUX_TOKEN'] || 'VLOnAImzwXz1PJbGTjObluBCowSdICubxeUmB8n0pJ9Ir2Olfokr4jzwoictIcaV1oMDM67OT3XRE6zJwN7V8w=='
 /** Organization within InfluxDB  */
-const org = process.env['INFLUX_ORG'] || '<organisation>'
+const org = process.env['INFLUX_ORG'] || 'fathima.nitt@gmail.com'
 /**InfluxDB bucket used in examples  */
 const bucket = '<bucket name'
 // ONLY onboarding example
@@ -20,3 +20,5 @@ module.exports = {
   username,
   password,
 }
+
+
